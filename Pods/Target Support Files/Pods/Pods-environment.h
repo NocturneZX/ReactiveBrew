@@ -6,6 +6,12 @@
 // project.
 
 
+// MTLManagedObjectAdapter
+#define COCOAPODS_POD_AVAILABLE_MTLManagedObjectAdapter
+#define COCOAPODS_VERSION_MAJOR_MTLManagedObjectAdapter 1
+#define COCOAPODS_VERSION_MINOR_MTLManagedObjectAdapter 0
+#define COCOAPODS_VERSION_PATCH_MTLManagedObjectAdapter 0
+
 // Mantle
 #define COCOAPODS_POD_AVAILABLE_Mantle
 #define COCOAPODS_VERSION_MAJOR_Mantle 2

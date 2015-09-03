@@ -16,6 +16,8 @@
 		4D0F1B4E1B83B794000467C6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F1B4C1B83B794000467C6 /* LaunchScreen.xib */; };
 		4D0F1B5A1B83B794000467C6 /* ReactiveBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F1B591B83B794000467C6 /* ReactiveBrewTests.m */; };
 		4D82E9C41B94D528006517A6 /* CoffeeAPIRapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */; };
+		4DBE630A1B98F6D000F6AC6D /* CoffeeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */; };
+		4DBE63101B98F78000F6AC6D /* Coffee.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE630F1B98F78000F6AC6D /* Coffee.m */; };
 		89882715011D9F19D6874987 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC4EF2F81074AB8FFC0234AD /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +48,10 @@
 		4D0F1B591B83B794000467C6 /* ReactiveBrewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveBrewTests.m; sourceTree = "<group>"; };
 		4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeAPIRapper.h; sourceTree = "<group>"; };
 		4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeAPIRapper.m; sourceTree = "<group>"; };
+		4DBE63081B98F6D000F6AC6D /* CoffeeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeEntity.h; sourceTree = "<group>"; };
+		4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeEntity.m; sourceTree = "<group>"; };
+		4DBE630E1B98F78000F6AC6D /* Coffee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coffee.h; sourceTree = "<group>"; };
+		4DBE630F1B98F78000F6AC6D /* Coffee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Coffee.m; sourceTree = "<group>"; };
 		5BB17FA9581EB9B00C734F75 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		9F62D1C379E8051C865912C4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EC4EF2F81074AB8FFC0234AD /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +119,10 @@
 				4D0F1B3A1B83B794000467C6 /* Supporting Files */,
 				4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */,
 				4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */,
+				4DBE63081B98F6D000F6AC6D /* CoffeeEntity.h */,
+				4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */,
+				4DBE630E1B98F78000F6AC6D /* Coffee.h */,
+				4DBE630F1B98F78000F6AC6D /* Coffee.m */,
 			);
 			path = ReactiveBrew;
 			sourceTree = "<group>";
@@ -288,9 +298,11 @@
 			files = (
 				4D82E9C41B94D528006517A6 /* CoffeeAPIRapper.m in Sources */,
 				4D0F1B401B83B794000467C6 /* AppDelegate.m in Sources */,
+				4DBE63101B98F78000F6AC6D /* Coffee.m in Sources */,
 				4D0F1B431B83B794000467C6 /* ReactiveBrew.xcdatamodeld in Sources */,
 				4D0F1B461B83B794000467C6 /* ViewController.m in Sources */,
 				4D0F1B3D1B83B794000467C6 /* main.m in Sources */,
+				4DBE630A1B98F6D000F6AC6D /* CoffeeEntity.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,7 +429,9 @@
 			baseConfigurationReference = 9F62D1C379E8051C865912C4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = ReactiveBrew/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -428,7 +442,9 @@
 			baseConfigurationReference = 5BB17FA9581EB9B00C734F75 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = ReactiveBrew/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

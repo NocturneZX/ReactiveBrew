@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="1N4-Bc-36W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="64u-gY-lXG">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -53,6 +54,22 @@
             </objects>
             <point key="canvasLocation" x="1019.5" y="413.5"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="1Pz-kS-vQ2">
+            <objects>
+                <navigationController storyboardIdentifier="Main" id="64u-gY-lXG" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q6v-Ia-MAq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="1N4-Bc-36W" kind="relationship" relationship="rootViewController" id="CTJ-bz-4SK"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wIN-jt-RDq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-345" y="380"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="C8Q-X2-z1j">
             <objects>
@@ -69,7 +86,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="125" id="SmL-OI-H4Z">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CoffeeCell" rowHeight="125" id="SmL-OI-H4Z">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SmL-OI-H4Z" id="OSJ-jI-7mN">
@@ -77,6 +94,10 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="1N4-Bc-36W" id="N4A-Bm-SbL"/>
+                                    <outlet property="delegate" destination="1N4-Bc-36W" id="oRB-JB-0dQ"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -87,6 +108,7 @@
                             <constraint firstItem="3TP-sR-zwz" firstAttribute="top" secondItem="sTx-SG-8UU" secondAttribute="bottom" id="cNr-3Y-Lbu"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="HUg-go-8Ny"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKh-ta-ND6" userLabel="First Responder" sceneMemberID="firstResponder"/>
