@@ -14,5 +14,9 @@
 #import "MTLManagedObjectAdapter.h"
 
 @interface Coffee : MTLModel<MTLJSONSerializing, MTLManagedObjectSerializing>
+@property (strong, nonatomic, readwrite) NSString * desc;
+@property (strong, nonatomic, readwrite) NSString * coffee_id;
+@property (strong, nonatomic, readwrite) NSString * imageURL;
+@property (strong, nonatomic, readwrite) NSString * name;
 
 @end

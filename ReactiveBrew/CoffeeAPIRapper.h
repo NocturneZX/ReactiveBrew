@@ -7,7 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ReactiveCocoa.h"
+#import "Mantle.h"
 
-@interface CoffeeAPIRapper : NSObject
+@class RACSignal;
+@interface CoffeeAPIRapper : NSObject<NSURLSessionDataDelegate>
+
+
++(CoffeeAPIRapper *)sharedCoffee;
+
+/*
+ * Fetches some coffee from the server using ReactiveCocoa
+ *
+ */
+- (RACSignal *)fetchmeSomeCoffee;
+
+- (RACSignal *)resetData;
+
+-(instancetype)initWithCoffeeURL:(NSURL *)urll;
 
 @end

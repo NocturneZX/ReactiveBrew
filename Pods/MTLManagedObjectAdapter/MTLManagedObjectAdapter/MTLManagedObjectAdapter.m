@@ -10,11 +10,8 @@
 
 #import <Mantle/Mantle.h>
 
-#import "EXTScope.h"
-#import "EXTRuntimeExtensions.h"
-
-//#import "mtl_moa_EXTScope.h"
-//#import "mtl_moa_EXTRuntimeExtensions.h"
+#import "mtl_moa_EXTScope.h"
+#import "mtl_moa_EXTRuntimeExtensions.h"
 
 #import "MTLManagedObjectAdapter.h"
 
@@ -743,7 +740,7 @@ static SEL MTLSelectorWithKeyPattern(NSString *key, const char *suffix) {
 
 		if (property == NULL) continue;
 
-		mtl_propertyAttributes *attributes = mtl_copyPropertyAttributes(property);
+		mtl_moa_propertyAttributes *attributes = mtl_moa_copyPropertyAttributes(property);
 		@onExit {
 			free(attributes);
 		};

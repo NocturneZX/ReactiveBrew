@@ -5,10 +5,16 @@
 //  Created by Julio Reyes on 8/18/15.
 //  Copyright (c) 2015 Julio Reyes. All rights reserved.
 //
+#import "Coffee.h"
+#import "CoffeeAPIRapper.h"
+#import "JR3PersistenceController.h"
 
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *brewTableView;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) JR3PersistenceController *persistenceController;
 
 @end
 
@@ -17,6 +23,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    NSLog(@"Entry point established.");
+    
+    [[[CoffeeAPIRapper sharedCoffee]fetchmeSomeCoffee]subscribeNext:^(NSArray* x) {
+        
+        Coffee *randomBrew = [x objectAtIndex:0];
+        NSLog(@"%@", randomBrew.desc);
+
+        
+    }];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -25,6 +41,19 @@
 }
 
 #pragma mark - UITableViewDataSource
+-(NSFetchedResultsController *)fetchedResultsController{
+    if (self.fetchedResultsController) return self.fetchedResultsController;
+    
+    NSManagedObjectContext *moc = [[self persistenceController]mainManagedObjectContext];
+    NSFetchRequest *brewFetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"CoffeeEntity"];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]initWithKey:@"coffee_id" ascending:YES];
+    [brewFetchRequest setSortDescriptors:@[sort]];
+    
+    NSFetchedResultsController *brewFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:brewFetchRequest managedObjectContext:moc sectionNameKeyPath:nil cacheName:@"MainCache"];
+    
+    
+    return self.fetchedResultsController;
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 0;
 }

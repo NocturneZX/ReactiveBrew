@@ -13,8 +13,8 @@
 @interface CoffeeEntity : NSManagedObject
 
 @property (nonatomic, retain) NSString * desc;
-@property (nonatomic, retain) NSString * id;
-@property (nonatomic, retain) NSString * image_url;
+@property (nonatomic, retain) NSString * coffee_id;
+@property (nonatomic, retain) NSString * imageurl;
 @property (nonatomic, retain) NSString * last_updated_at;
 @property (nonatomic, retain) NSString * name;
 

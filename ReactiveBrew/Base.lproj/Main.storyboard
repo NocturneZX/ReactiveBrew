@@ -82,15 +82,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="125" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sTx-SG-8UU">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="260" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sTx-SG-8UU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CoffeeCell" rowHeight="125" id="SmL-OI-H4Z">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CoffeeCell" rowHeight="260" id="SmL-OI-H4Z">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="SmL-OI-H4Z" id="OSJ-jI-7mN">
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e2F-GV-Pxj">
+                                                    <rect key="frame" x="8" y="8" width="398" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Amz-N9-rMC">
+                                                    <rect key="frame" x="8" y="37" width="398" height="75"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEu-BM-TtY">
+                                                    <rect key="frame" x="8" y="120" width="240" height="128"/>
+                                                </imageView>
+                                            </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
@@ -102,10 +121,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sTx-SG-8UU" firstAttribute="top" secondItem="Pi7-2j-a0p" secondAttribute="topMargin" id="AWA-lP-X1m"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sTx-SG-8UU" secondAttribute="trailing" constant="-16" id="G5h-qc-2i7"/>
-                            <constraint firstItem="sTx-SG-8UU" firstAttribute="leading" secondItem="Pi7-2j-a0p" secondAttribute="leadingMargin" constant="-16" id="H3q-yg-3GH"/>
-                            <constraint firstItem="3TP-sR-zwz" firstAttribute="top" secondItem="sTx-SG-8UU" secondAttribute="bottom" id="cNr-3Y-Lbu"/>
+                            <constraint firstItem="3TP-sR-zwz" firstAttribute="top" secondItem="sTx-SG-8UU" secondAttribute="bottom" id="51a-TC-xAi"/>
+                            <constraint firstItem="sTx-SG-8UU" firstAttribute="top" secondItem="Pi7-2j-a0p" secondAttribute="topMargin" id="Elc-iq-HlN"/>
+                            <constraint firstItem="sTx-SG-8UU" firstAttribute="leading" secondItem="Pi7-2j-a0p" secondAttribute="leadingMargin" constant="-16" id="eMU-pC-O5a"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sTx-SG-8UU" secondAttribute="trailing" constant="-16" id="fSd-uD-FAJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="HUg-go-8Ny"/>

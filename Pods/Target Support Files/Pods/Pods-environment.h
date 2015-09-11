@@ -8,9 +8,17 @@
 
 // MTLManagedObjectAdapter
 #define COCOAPODS_POD_AVAILABLE_MTLManagedObjectAdapter
-#define COCOAPODS_VERSION_MAJOR_MTLManagedObjectAdapter 1
-#define COCOAPODS_VERSION_MINOR_MTLManagedObjectAdapter 0
-#define COCOAPODS_VERSION_PATCH_MTLManagedObjectAdapter 0
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 1.0.0.1.
+
+// MTLManagedObjectAdapter/extobjc
+#define COCOAPODS_POD_AVAILABLE_MTLManagedObjectAdapter_extobjc
+// This library does not follow semantic-versioning,
+// so we were not able to define version macros.
+// Please contact the author.
+// Version: 1.0.0.1.
 
 // Mantle
 #define COCOAPODS_POD_AVAILABLE_Mantle

@@ -13,10 +13,9 @@
 {
     return @{
              @"desc" : @"desc",
-             @"image_url" : @"image_url",
-             @"id" : @"id",
+             @"imageURL" : @"image_url",
+             @"coffee_id" : @"id",
              @"name" : @"name",
-             @"last_updated_at" : @"last_updated_at"
              };
 }
 
@@ -36,10 +35,9 @@
 {
     return @{
              @"desc" : @"desc",
-             @"image_url" : @"image_url",
-             @"id" : @"id",
+             @"imageURL" : @"image_url",
+             @"coffee_id" : @"id",
              @"name" : @"name",
-             @"last_updated_at" : @"last_updated_at"
              };
 }
 

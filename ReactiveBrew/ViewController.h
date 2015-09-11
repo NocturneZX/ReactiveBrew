@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+@import CoreData;
 
-@interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
 
 @end

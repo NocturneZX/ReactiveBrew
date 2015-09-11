@@ -2,9 +2,11 @@ PODS:
   - Mantle (2.0.4):
     - Mantle/extobjc (= 2.0.4)
   - Mantle/extobjc (2.0.4)
-  - MTLManagedObjectAdapter (1.0):
+  - MTLManagedObjectAdapter (1.0.0.1):
     - Mantle (~> 2.0)
-    - MTLManagedObjectAdapter/extobjc (= 1.0)
+    - MTLManagedObjectAdapter/extobjc (= 1.0.0.1)
+  - MTLManagedObjectAdapter/extobjc (1.0.0.1):
+    - Mantle (~> 2.0)
   - ReactiveCocoa (2.5):
     - ReactiveCocoa/UI (= 2.5)
   - ReactiveCocoa/Core (2.5):
@@ -17,14 +19,14 @@ PODS:
   - SDWebImage/Core (3.7.3)
 
 DEPENDENCIES:
-  - Mantle (~> 2.0)
-  - MTLManagedObjectAdapter (~> 1.0)
+  - Mantle
+  - MTLManagedObjectAdapter
   - ReactiveCocoa
   - SDWebImage
 
 SPEC CHECKSUMS:
   Mantle: 6bee68168423948be0c0c5924832bf3af188e099
-  MTLManagedObjectAdapter: cd1bf9562f205407d584ab7a577bd112ec140095
+  MTLManagedObjectAdapter: 2da4b0244ee66f87b43e5fe9e7cd47838dea83ae
   ReactiveCocoa: e2db045570aa97c695e7aa97c2bcab222ae51f4a
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
 
