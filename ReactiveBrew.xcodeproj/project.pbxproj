@@ -49,7 +49,6 @@
 		4D0F1B591B83B794000467C6 /* ReactiveBrewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveBrewTests.m; sourceTree = "<group>"; };
 		4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeAPIRapper.h; sourceTree = "<group>"; };
 		4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeAPIRapper.m; sourceTree = "<group>"; };
-		4DB604141BA3392900531D1A /* APICredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICredentials.h; sourceTree = "<group>"; };
 		4DBE63081B98F6D000F6AC6D /* CoffeeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeEntity.h; sourceTree = "<group>"; };
 		4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeEntity.m; sourceTree = "<group>"; };
 		4DBE630E1B98F78000F6AC6D /* Coffee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coffee.h; sourceTree = "<group>"; };
@@ -112,7 +111,6 @@
 		4D0F1B391B83B794000467C6 /* ReactiveBrew */ = {
 			isa = PBXGroup;
 			children = (
-				4DB604141BA3392900531D1A /* APICredentials.h */,
 				4D0F1B3E1B83B794000467C6 /* AppDelegate.h */,
 				4D0F1B3F1B83B794000467C6 /* AppDelegate.m */,
 				4D0F1B441B83B794000467C6 /* ViewController.h */,
