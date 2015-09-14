@@ -8,7 +8,6 @@
 
 #import "CoffeeEntity.h"
 
-
 @implementation CoffeeEntity
 
 @dynamic desc;

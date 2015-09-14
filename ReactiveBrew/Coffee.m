@@ -7,13 +7,14 @@
 //
 
 #import "Coffee.h"
+#import "CoffeeEntity.h"
 
 @implementation Coffee
 + (NSDictionary *)JSONKeyPathsByPropertyKey
 {
     return @{
              @"desc" : @"desc",
-             @"imageURL" : @"image_url",
+             @"imageurl" : @"image_url",
              @"coffee_id" : @"id",
              @"name" : @"name",
              };
@@ -35,15 +36,15 @@
 {
     return @{
              @"desc" : @"desc",
-             @"imageURL" : @"image_url",
-             @"coffee_id" : @"id",
+             @"imageurl" : @"imageurl",
+             @"coffee_id" : @"coffee_id",
              @"name" : @"name",
              };
 }
 
 + (NSSet *)propertyKeysForManagedObjectUniquing
 {
-    return [NSSet setWithObject:@"id"];
+    return [NSSet setWithObject:@"coffee_id"];
 }
 
 + (NSDictionary *)relationshipModelClassesByPropertyKey
@@ -52,4 +53,9 @@
              @"coffees:": Coffee.class,
     };
 }
+
+- (id)transformedValue:(id)value success:(BOOL *)success error:(NSError **)error{
+    return nil;
+}
+
 @end

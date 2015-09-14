@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Mantle/Mantle.h>
+#import <MTLManagedObjectAdapter.h>
+
 @import CoreData;
 
 @interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
+@property (strong, readonly) JR3PersistenceController *persistenceController;
 
 @end
 

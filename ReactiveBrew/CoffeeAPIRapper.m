@@ -33,9 +33,17 @@ NSInteger const JR3ErrorCode = -42;
     return sharedCoffeeAPIClient;
 }
 
+- (id)init
+{
+    NSException *exception = [NSException exceptionWithName:@"Singleton" reason:@"Use +(CoffeeAPIRapper *)sharedCoffee instead" userInfo:nil];
+    
+    [exception raise];
+    
+    return nil;
+}
+
 -(instancetype)initWithCoffeeURL:(NSURL *)url{
-    self = [super init];
-    if (self) {
+    if (self = [super init]) {
         self.baseURL = url;
     }
     return self;
@@ -73,7 +81,6 @@ NSInteger const JR3ErrorCode = -42;
                             [filteredArray addObject:brew];
                         }
                     }
-                    NSLog(@"%@", filteredArray);
                     
                     NSError *didFail;
                     NSArray *brewBatches = [MTLJSONAdapter modelsOfClass:[Coffee class] fromJSONArray:filteredArray error:&didFail];

@@ -21,6 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setPersistenceController:[[JR3PersistenceController alloc]initWithCallback:^{
+        NSLog(@"Persistence controller created. Comm-link online.");
         [self completeUserInterface];
     }]];
     return YES;

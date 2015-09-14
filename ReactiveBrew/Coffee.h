@@ -10,13 +10,13 @@
 
 #import <Mantle/Mantle.h>
 #import <CoreData/CoreData.h>
+#import <MTLManagedObjectAdapter.h>
 
-#import "MTLManagedObjectAdapter.h"
-
-@interface Coffee : MTLModel<MTLJSONSerializing, MTLManagedObjectSerializing>
+@class CoffeeEntity;
+@interface Coffee : MTLModel <MTLJSONSerializing, MTLManagedObjectSerializing, MTLTransformerErrorHandling>
 @property (strong, nonatomic, readwrite) NSString * desc;
 @property (strong, nonatomic, readwrite) NSString * coffee_id;
-@property (strong, nonatomic, readwrite) NSString * imageURL;
+@property (strong, nonatomic, readwrite) NSString * imageurl;
 @property (strong, nonatomic, readwrite) NSString * name;
 
 @end
