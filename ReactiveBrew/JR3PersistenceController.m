@@ -22,6 +22,17 @@
 
 @implementation JR3PersistenceController
 
+//+ (instancetype)sharedManager {
+//    static JR3PersistenceController *singleton;
+//    static dispatch_once_t singletonToken;
+//    dispatch_once(&singletonToken, ^{
+//        singleton = [[self alloc] initWithCallback:^{
+//            
+//        }];
+//    });
+//    return singleton;
+//}
+
 -(instancetype)initWithCallback:(InitialCallbackBlock)callback{
     if (!(self = [super init])) {
         return nil;

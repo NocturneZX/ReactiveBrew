@@ -14,10 +14,10 @@
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *brewTableView;
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, readwrite) JR3PersistenceController *persistenceController;
+@property (strong, nonatomic) NSFetchedResultsController *brewFetchedResultsController;
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSArray *coffees;
+
 
 @end
 
@@ -35,11 +35,15 @@
     [super viewWillAppear:animated];
     @weakify(self);
     // GET ALL THE BREWS VIA REACTIVECOCOA
-    [[[[CoffeeAPIRapper sharedCoffee]fetchmeSomeCoffee]deliverOn:[RACScheduler mainThreadScheduler]]
-     subscribeNext:^(NSArray* x){
+    [[[[CoffeeAPIRapper sharedCoffee]fetchmeSomeCoffee]
+      deliverOn:[RACScheduler mainThreadScheduler]]
+     subscribeNext:^(id x) {
          @strongify(self);
-         [self setPersistenceController:[[JR3PersistenceController alloc]initWithCallback:^{
-             [x enumerateObjectsUsingBlock:^(id brewObj, NSUInteger idx, BOOL *stop) {
+         
+//         id applicationDelegate = [[UIApplication sharedApplication] delegate];
+//         self.persistenceController = [applicationDelegate persistenceController];
+         NSLog(@"%@", self.persistenceController);
+         [x enumerateObjectsUsingBlock:^(id brewObj, NSUInteger idx, BOOL *stop) {
                  
                  Coffee *currentBrew = brewObj;
                  NSLog(@"%@", currentBrew);
@@ -53,12 +57,12 @@
                  if (![moc save:&error]) {
                      NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
                  }
-               //  NSLog(@"%@", self.fetchedResultsController);
              }];
-         }]];
+             
+             NSLog(@"%@", self.persistenceController);
+
+     }completed:^{
          
-         // Will crash if I invoke fecthedResultsController
-        // self.coffees = [self.fetchedResultsController fetchedObjects];
      }];
     
 }
@@ -68,37 +72,36 @@
 }
 
 #pragma mark - UITableViewDataSource
--(NSFetchedResultsController *)fetchedResultsController{
-//    if (self.fetchedResultsController != nil){
-//        return self.fetchedResultsController;
-//    }
+-(NSFetchedResultsController *)brewFetchedResultsController{
+    if (_brewFetchedResultsController){
+        return _brewFetchedResultsController;
+    }
     
     NSManagedObjectContext *moc = [[self persistenceController]mainManagedObjectContext];
-//    if (!moc) {
-//        return nil;
-//    }
+
     NSFetchRequest *brewFetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"CoffeeEntity"];
     NSSortDescriptor *sort = [[NSSortDescriptor alloc]initWithKey:@"coffee_id" ascending:YES];
     [brewFetchRequest setSortDescriptors:@[sort]];
     
-    NSFetchedResultsController *brewFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:brewFetchRequest managedObjectContext:moc sectionNameKeyPath:nil cacheName:@"MainCache"];
-    [self setFetchedResultsController:brewFRC];
-    [[self fetchedResultsController] setDelegate:self];
+    NSFetchedResultsController *brewFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:brewFetchRequest managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil];
+    [self setBrewFetchedResultsController:brewFRC];
+    [[self brewFetchedResultsController] setDelegate:self];
     
     NSError *error;
-    if (![self.fetchedResultsController performFetch:&error]) {
+    if (![_brewFetchedResultsController performFetch:&error]) {
         NSLog(@"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
     }
     
-    return self.fetchedResultsController;
+    return _brewFetchedResultsController;
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   return [[[self fetchedResultsController] sections] count];
+   //return [[[self brewFetchedResultsController] sections] count];
+    return 0;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self fetchedResultsController]sections] objectAtIndex:section];
-    return [sectionInfo numberOfObjects] ? 0 : [sectionInfo numberOfObjects];
-   // return 0;
+//    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self brewFetchedResultsController]sections] objectAtIndex:section];
+//    return [sectionInfo numberOfObjects] ? 0 : [sectionInfo numberOfObjects];
+    return 0;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:

@@ -14,7 +14,7 @@
 
 @interface ViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, NSFetchedResultsControllerDelegate>
 
-@property (strong, readonly) JR3PersistenceController *persistenceController;
+@property JR3PersistenceController *persistenceController;
 
 @end
 

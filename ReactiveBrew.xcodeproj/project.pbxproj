@@ -16,6 +16,7 @@
 		4D0F1B5A1B83B794000467C6 /* ReactiveBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F1B591B83B794000467C6 /* ReactiveBrewTests.m */; };
 		4D82E9C41B94D528006517A6 /* CoffeeAPIRapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */; };
 		4DB604181BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DB604161BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld */; };
+		4DB6041B1BA8A31D00531D1A /* CoreDataScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */; };
 		4DBE630A1B98F6D000F6AC6D /* CoffeeEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */; };
 		4DBE63101B98F78000F6AC6D /* Coffee.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DBE630F1B98F78000F6AC6D /* Coffee.m */; };
 		4DE1541C1BA0A31500D41FD1 /* JR3PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DE1541B1BA0A31500D41FD1 /* JR3PersistenceController.m */; };
@@ -50,6 +51,8 @@
 		4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeAPIRapper.m; sourceTree = "<group>"; };
 		4DB604151BA37C7E00531D1A /* APICredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICredentials.h; sourceTree = "<group>"; };
 		4DB604171BA78D4E00531D1A /* ReactiveBrew.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ReactiveBrew.xcdatamodel; sourceTree = "<group>"; };
+		4DB604191BA8A31D00531D1A /* CoreDataScheduler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataScheduler.h; sourceTree = "<group>"; };
+		4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataScheduler.m; sourceTree = "<group>"; };
 		4DBE63081B98F6D000F6AC6D /* CoffeeEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeEntity.h; sourceTree = "<group>"; };
 		4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeEntity.m; sourceTree = "<group>"; };
 		4DBE630E1B98F78000F6AC6D /* Coffee.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Coffee.h; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 				4DBE630E1B98F78000F6AC6D /* Coffee.h */,
 				4DBE630F1B98F78000F6AC6D /* Coffee.m */,
 				4DE1541D1BA0A31A00D41FD1 /* Core Data Stack */,
+				4DB604191BA8A31D00531D1A /* CoreDataScheduler.h */,
+				4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */,
 			);
 			path = ReactiveBrew;
 			sourceTree = "<group>";
@@ -314,6 +319,7 @@
 				4D82E9C41B94D528006517A6 /* CoffeeAPIRapper.m in Sources */,
 				4D0F1B401B83B794000467C6 /* AppDelegate.m in Sources */,
 				4DBE63101B98F78000F6AC6D /* Coffee.m in Sources */,
+				4DB6041B1BA8A31D00531D1A /* CoreDataScheduler.m in Sources */,
 				4D0F1B461B83B794000467C6 /* ViewController.m in Sources */,
 				4DB604181BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld in Sources */,
 				4DE1541C1BA0A31500D41FD1 /* JR3PersistenceController.m in Sources */,

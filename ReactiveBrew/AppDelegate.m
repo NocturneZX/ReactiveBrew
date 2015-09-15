@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "JR3PersistenceController.h"
+#import "ViewController.h"
 
 @interface AppDelegate ()
 
@@ -21,7 +22,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setPersistenceController:[[JR3PersistenceController alloc]initWithCallback:^{
-        NSLog(@"Persistence controller created. Comm-link online.");
+        NSLog(@"Persistence controller created. Comm-link online. %@", self.persistenceController);
+   
+        
         [self completeUserInterface];
     }]];
     return YES;
@@ -59,6 +62,9 @@
 - (void)completeUserInterface
 {
     [[UINavigationBar appearance]setTranslucent:NO];
+    
+    ViewController *vc = (ViewController *)self.window.rootViewController;
+    vc.persistenceController = self.persistenceController;
 }
 
 //
