@@ -28,41 +28,36 @@
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"Entry point established.");
     
-    NSLog(@"%@", self.coffees);
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    // I SHAN'T NOT DO THIS EVER AGAIN!!!
+    //         id applicationDelegate = [[UIApplication sharedApplication] delegate];
+    //         self.persistenceController = [applicationDelegate persistenceController];
     @weakify(self);
     // GET ALL THE BREWS VIA REACTIVECOCOA
     [[[[CoffeeAPIRapper sharedCoffee]fetchmeSomeCoffee]
-      deliverOn:[RACScheduler mainThreadScheduler]]
+      deliverOn:[RACScheduler schedulerWithPriority:RACSchedulerPriorityBackground]]
      subscribeNext:^(id x) {
          @strongify(self);
-         
-//         id applicationDelegate = [[UIApplication sharedApplication] delegate];
-//         self.persistenceController = [applicationDelegate persistenceController];
-         NSLog(@"%@", self.persistenceController);
          [x enumerateObjectsUsingBlock:^(id brewObj, NSUInteger idx, BOOL *stop) {
-                 
-                 Coffee *currentBrew = brewObj;
-                 NSLog(@"%@", currentBrew);
-                 
-                 NSManagedObjectContext *moc = [self.persistenceController mainManagedObjectContext];
-                 NSError *error;
-                 
-                 [MTLManagedObjectAdapter managedObjectFromModel:currentBrew
-                                            insertingIntoContext:moc error:&error];
-                 
-                 if (![moc save:&error]) {
-                     NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
-                 }
-             }];
              
-             NSLog(@"%@", self.persistenceController);
-
+             Coffee *currentBrew = brewObj;
+             NSManagedObjectContext *moc = [self.persistenceController mainManagedObjectContext];
+             NSError *error;
+             
+             [MTLManagedObjectAdapter managedObjectFromModel:currentBrew
+                                        insertingIntoContext:moc error:&error];
+             
+             if (![moc save:&error]) {
+                 NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
+             }
+         }];
      }completed:^{
-         
+         self.coffees = [self.brewFetchedResultsController fetchedObjects];
+         NSLog(@"%@", self.coffees);
      }];
     
 }
@@ -80,7 +75,7 @@
     NSManagedObjectContext *moc = [[self persistenceController]mainManagedObjectContext];
 
     NSFetchRequest *brewFetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"CoffeeEntity"];
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc]initWithKey:@"coffee_id" ascending:YES];
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc]initWithKey:@"name" ascending:NO];
     [brewFetchRequest setSortDescriptors:@[sort]];
     
     NSFetchedResultsController *brewFRC = [[NSFetchedResultsController alloc]initWithFetchRequest:brewFetchRequest managedObjectContext:moc sectionNameKeyPath:nil cacheName:nil];
@@ -101,7 +96,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self brewFetchedResultsController]sections] objectAtIndex:section];
 //    return [sectionInfo numberOfObjects] ? 0 : [sectionInfo numberOfObjects];
-    return 0;
+    return [self.coffees count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -116,6 +111,57 @@
 -(void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
     [[self brewTableView]beginUpdates];
 }
+
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self brewTableView] insertSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [[self brewTableView] deleteSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeMove:
+            break;
+        case NSFetchedResultsChangeUpdate:
+            break;
+    }
+}
+
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
+    NSArray *newArray = nil;
+    NSArray *oldArray = nil;
+    
+    if (newIndexPath) {
+        newArray = [NSArray arrayWithObject:newIndexPath];
+    }
+    
+    if (indexPath) {
+        oldArray = [NSArray arrayWithObject:indexPath];
+    }
+    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [[self brewTableView] insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeDelete:
+            [[self brewTableView] deleteRowsAtIndexPaths:oldArray withRowAnimation:UITableViewRowAnimationFade];
+            break;
+        case NSFetchedResultsChangeUpdate:
+        {
+            UITableViewCell *cell = [[self brewTableView] cellForRowAtIndexPath:indexPath];
+            NSManagedObject *object = [[self brewFetchedResultsController] objectAtIndexPath:indexPath];
+            [[cell textLabel] setText:[object valueForKey:@"dataItem"]];
+            break;
+        }
+        case NSFetchedResultsChangeMove:
+            [[self brewTableView] deleteRowsAtIndexPaths:oldArray withRowAnimation:UITableViewRowAnimationFade];
+            [[self brewTableView] insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
+}
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
     [[self brewTableView] endUpdates];
 }
