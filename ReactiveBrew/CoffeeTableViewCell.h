@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CoffeeTableViewCell : UITableViewCell
-@property(nonatomic, weak)IBOutlet UILabel *brewLabel;
-@property(nonatomic, weak)IBOutlet UITextView *brewTextView;
+@property (nonatomic, strong) IBOutlet UIImageView *brewImage;
+@property (nonatomic, weak) IBOutlet UILabel *brewLabel;
+@property (nonatomic, weak) IBOutlet UITextView *brewTextView;
 @end

@@ -130,10 +130,7 @@
 				4D0F1B3A1B83B794000467C6 /* Supporting Files */,
 				4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */,
 				4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */,
-				4DBE63081B98F6D000F6AC6D /* CoffeeEntity.h */,
-				4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */,
-				4DBE630E1B98F78000F6AC6D /* Coffee.h */,
-				4DBE630F1B98F78000F6AC6D /* Coffee.m */,
+				4DB6041F1BADA97E00531D1A /* Data Models */,
 				4DE1541D1BA0A31A00D41FD1 /* Core Data Stack */,
 				4DB604191BA8A31D00531D1A /* CoreDataScheduler.h */,
 				4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */,
@@ -167,6 +164,17 @@
 				4D0F1B581B83B794000467C6 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4DB6041F1BADA97E00531D1A /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				4DBE63081B98F6D000F6AC6D /* CoffeeEntity.h */,
+				4DBE63091B98F6D000F6AC6D /* CoffeeEntity.m */,
+				4DBE630E1B98F78000F6AC6D /* Coffee.h */,
+				4DBE630F1B98F78000F6AC6D /* Coffee.m */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		4DE1541D1BA0A31A00D41FD1 /* Core Data Stack */ = {

@@ -39,6 +39,7 @@
              @"imageurl" : @"imageurl",
              @"coffee_id" : @"coffee_id",
              @"name" : @"name",
+             @"last_updated_at" : @"last_updated_at"
              };
 }
 

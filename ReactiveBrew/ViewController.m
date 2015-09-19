@@ -9,7 +9,7 @@
 #import "CoffeeEntity.h"
 #import "CoffeeAPIRapper.h"
 #import "JR3PersistenceController.h"
-
+#import "CoffeeTableViewCell.h"
 #import "ViewController.h"
 
 @interface ViewController ()
@@ -18,10 +18,11 @@
 @property (strong, nonatomic) NSDateFormatter *dateFormatter;
 @property (nonatomic, strong) NSArray *coffees;
 
-
 @end
 
 @implementation ViewController
+
+static NSString * const reuseIdentifier = @"CoffeeCell";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,10 +37,10 @@
     // I SHAN'T NOT DO THIS EVER AGAIN!!!
     //         id applicationDelegate = [[UIApplication sharedApplication] delegate];
     //         self.persistenceController = [applicationDelegate persistenceController];
+    
     @weakify(self);
     // GET ALL THE BREWS VIA REACTIVECOCOA
-    [[[[CoffeeAPIRapper sharedCoffee]fetchmeSomeCoffee]
-      deliverOn:[RACScheduler schedulerWithPriority:RACSchedulerPriorityBackground]]
+    [[[CoffeeAPIRapper sharedCoffee]fetchmeSomeCoffee]
      subscribeNext:^(id x) {
          @strongify(self);
          [x enumerateObjectsUsingBlock:^(id brewObj, NSUInteger idx, BOOL *stop) {
@@ -54,10 +55,13 @@
              if (![moc save:&error]) {
                  NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
              }
+             
          }];
      }completed:^{
          self.coffees = [self.brewFetchedResultsController fetchedObjects];
-         NSLog(@"%@", self.coffees);
+         [self.brewTableView reloadData];
+
+         NSLog(@"%lu", (unsigned long)self.coffees.count);
      }];
     
 }
@@ -68,9 +72,7 @@
 
 #pragma mark - UITableViewDataSource
 -(NSFetchedResultsController *)brewFetchedResultsController{
-    if (_brewFetchedResultsController){
-        return _brewFetchedResultsController;
-    }
+    if (_brewFetchedResultsController) return _brewFetchedResultsController;
     
     NSManagedObjectContext *moc = [[self persistenceController]mainManagedObjectContext];
 
@@ -83,16 +85,11 @@
     [[self brewFetchedResultsController] setDelegate:self];
     
     NSError *error;
-    if (![_brewFetchedResultsController performFetch:&error]) {
-        NSLog(@"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
-    }
-    
+    NSAssert([_brewFetchedResultsController performFetch:&error], @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
+
     return _brewFetchedResultsController;
 }
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-   //return [[[self brewFetchedResultsController] sections] count];
-    return 0;
-}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self brewFetchedResultsController]sections] objectAtIndex:section];
 //    return [sectionInfo numberOfObjects] ? 0 : [sectionInfo numberOfObjects];
@@ -103,7 +100,28 @@
 // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return nil;
+    CoffeeTableViewCell *coffeecell = [tableView
+                                       dequeueReusableCellWithIdentifier:reuseIdentifier forIndexPath:indexPath];
+    
+    if (!coffeecell) {
+        coffeecell = [[CoffeeTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault
+                                               reuseIdentifier:reuseIdentifier];
+    }
+    
+    // rac_prepareForResuseSignal?
+    [coffeecell prepareForReuse];
+    
+    CoffeeEntity *currentBrew = [self.coffees objectAtIndex:indexPath.row];
+    NSLog(@"%@", currentBrew.description);
+    
+    coffeecell.brewLabel.text = currentBrew.name;
+    
+    coffeecell.brewTextView.text = currentBrew.desc;
+    
+    [coffeecell.brewImage sd_setImageWithURL:[NSURL URLWithString:currentBrew.imageurl]
+                                                    placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    return coffeecell;
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate Methods

@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Mantle/Mantle.h>
 #import <MTLManagedObjectAdapter.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @import CoreData;
 
