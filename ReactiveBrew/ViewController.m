@@ -28,7 +28,8 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     NSLog(@"Entry point established.");
-    
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Drip Image"]];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -114,9 +115,9 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
     CoffeeEntity *currentBrew = [self.coffees objectAtIndex:indexPath.row];
     NSLog(@"%@", currentBrew.description);
     
-    coffeecell.brewLabel.text = currentBrew.name;
+    coffeecell.brewTitle.text = currentBrew.name;
     
-    coffeecell.brewTextView.text = currentBrew.desc;
+    coffeecell.brewDescription.text = currentBrew.desc;
     
     [coffeecell.brewImage sd_setImageWithURL:[NSURL URLWithString:currentBrew.imageurl]
                                                     placeholderImage:[UIImage imageNamed:@"placeholder"]];

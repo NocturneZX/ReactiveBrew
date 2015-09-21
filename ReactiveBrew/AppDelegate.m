@@ -5,6 +5,12 @@
 //  Created by Julio Reyes on 8/18/15.
 //  Copyright (c) 2015 Julio Reyes. All rights reserved.
 //
+#define UIColorFromRGB(rgbValue) \
+[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
+green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
+blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
+alpha:1.0]
+
 
 #import "AppDelegate.h"
 #import "JR3PersistenceController.h"
@@ -24,6 +30,9 @@
     [self setPersistenceController:[[JR3PersistenceController alloc]initWithCallback:^{
         NSLog(@"Persistence controller created. Comm-link online. %@", self.persistenceController);
    
+        UINavigationController  *navController = (UINavigationController *)self.window.rootViewController;
+        ViewController *vc = (ViewController *)(navController.viewControllers)[0];
+        vc.persistenceController = self.persistenceController;
         
         [self completeUserInterface];
     }]];
@@ -62,9 +71,7 @@
 - (void)completeUserInterface
 {
     [[UINavigationBar appearance]setTranslucent:NO];
-    
-    ViewController *vc = (ViewController *)self.window.rootViewController;
-    vc.persistenceController = self.persistenceController;
+    [[UINavigationBar appearance]setBarTintColor:UIColorFromRGB(0xF16421)];
 }
 
 //

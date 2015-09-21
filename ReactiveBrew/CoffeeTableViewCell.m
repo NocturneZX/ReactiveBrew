@@ -37,16 +37,16 @@
 
 -(void)layoutSubviews{
     [super layoutSubviews];
-    
-    CGSize maxSize = CGSizeMake(260.0f, CGFLOAT_MAX);
-    CGSize requiredSize = [self.brewLabel sizeThatFits:maxSize];
-    self.brewLabel.frame = CGRectMake(self.brewLabel.frame.origin.x, self.brewLabel.frame.origin.y, requiredSize.width, requiredSize.height);
-    
-    requiredSize = [self.brewTextView sizeThatFits:maxSize];
-    self.brewTextView.frame = CGRectMake(self.brewTextView.frame.origin.x, self.brewTextView.frame.origin.y, requiredSize.width, requiredSize.height);
-    
-    requiredSize = [self.brewImage sizeThatFits:maxSize];
-    self.brewImage.frame = CGRectMake(self.brewImage.frame.origin.x, self.brewImage.frame.origin.y, requiredSize.width, requiredSize.height);
+//    
+//    CGSize maxSize = CGSizeMake(260.0f, CGFLOAT_MAX);
+//    CGSize requiredSize = [self.brewTitle sizeThatFits:maxSize];
+//    self.brewTitle.frame = CGRectMake(self.brewTitle.frame.origin.x, self.brewTitle.frame.origin.y, requiredSize.width, requiredSize.height);
+//    
+//    requiredSize = [self.brewDescription sizeThatFits:maxSize];
+//    self.brewDescription.frame = CGRectMake(self.brewDescription.frame.origin.x, self.brewDescription.frame.origin.y, requiredSize.width, requiredSize.height);
+//    
+//    requiredSize = [self.brewImage sizeThatFits:maxSize];
+//    self.brewImage.frame = CGRectMake(self.brewImage.frame.origin.x, self.brewImage.frame.origin.y, requiredSize.width, requiredSize.height);
 
     
 }

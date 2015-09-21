@@ -10,6 +10,6 @@
 
 @interface CoffeeTableViewCell : UITableViewCell
 @property (nonatomic, strong) IBOutlet UIImageView *brewImage;
-@property (nonatomic, weak) IBOutlet UILabel *brewLabel;
-@property (nonatomic, weak) IBOutlet UITextView *brewTextView;
+@property (nonatomic, weak) IBOutlet UILabel *brewTitle;
+@property (nonatomic, weak) IBOutlet UILabel *brewDescription;
 @end
