@@ -3,11 +3,12 @@
     <entity name="CoffeeEntity" representedClassName="" syncable="YES">
         <attribute name="coffee_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="desc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="imageurl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="last_updated_at" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CoffeeEntity" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="CoffeeEntity" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

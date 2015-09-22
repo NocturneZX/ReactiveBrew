@@ -21,6 +21,7 @@
  *
  */
 - (RACSignal *)fetchmeSomeCoffee;
+- (RACSignal *)fetchmeMoreCoffeeInfo:(NSString *)coffeeID;
 
 - (RACSignal *)resetData;
 

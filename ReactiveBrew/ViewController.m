@@ -10,7 +10,9 @@
 #import "CoffeeAPIRapper.h"
 #import "JR3PersistenceController.h"
 #import "CoffeeTableViewCell.h"
+
 #import "ViewController.h"
+#import "BrewDetailsViewController.h"
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *brewTableView;
@@ -58,7 +60,11 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
              }
              
          }];
-     }completed:^{
+     }
+     error:^(NSError *error) {
+         self.coffees = [self.brewFetchedResultsController fetchedObjects];
+     }
+     completed:^{
          self.coffees = [self.brewFetchedResultsController fetchedObjects];
          [self.brewTableView reloadData];
 
@@ -94,7 +100,7 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self brewFetchedResultsController]sections] objectAtIndex:section];
 //    return [sectionInfo numberOfObjects] ? 0 : [sectionInfo numberOfObjects];
-    return [self.coffees count];
+    return [self.coffees count] > 0 ? 0 : [self.coffees count];
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -113,76 +119,43 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
     [coffeecell prepareForReuse];
     
     CoffeeEntity *currentBrew = [self.coffees objectAtIndex:indexPath.row];
-    NSLog(@"%@", currentBrew.description);
     
     coffeecell.brewTitle.text = currentBrew.name;
-    
     coffeecell.brewDescription.text = currentBrew.desc;
-    
     [coffeecell.brewImage sd_setImageWithURL:[NSURL URLWithString:currentBrew.imageurl]
-                                                    placeholderImage:[UIImage imageNamed:@"placeholder"]];
-    
+                                                    placeholderImage:[UIImage imageNamed:@"placeholder"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                                        
+                                                    }];
     return coffeecell;
 }
 
-#pragma mark - NSFetchedResultsControllerDelegate Methods
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if ([segue.identifier isEqualToString:@"DetailSegue"]) {
+        
+        NSIndexPath *currentIDX = [self.brewTableView indexPathForSelectedRow];
+        CoffeeEntity *selectedBrew = (self.coffees)[currentIDX.row];
+        
+        [[[CoffeeAPIRapper sharedCoffee]fetchmeMoreCoffeeInfo:selectedBrew.coffee_id]subscribeNext:^(id newInfo) {
 
--(void)controllerWillChangeContent:(NSFetchedResultsController *)controller{
-    [[self brewTableView]beginUpdates];
-}
+            NSString *dateUpdated = [newInfo valueForKey:@"last_updated_at"];
+            
+            NSManagedObject *brewObject = [[self brewFetchedResultsController] objectAtIndexPath:currentIDX];
+            NSManagedObjectContext *moc = [self.brewFetchedResultsController managedObjectContext];
+            [brewObject setValue:dateUpdated forKey:@"last_updated_at"];
+            
+            NSError *error;
+            if (![moc save:&error]) {
+                NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
+            }
 
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type {
-    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndex:sectionIndex];
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [[self brewTableView] insertSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [[self brewTableView] deleteSections:indexSet withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeMove:
-            break;
-        case NSFetchedResultsChangeUpdate:
-            break;
+        }];
+        
+        
+        BrewDetailsViewController *detailsVC = (BrewDetailsViewController *)segue.destinationViewController;
+        
+        detailsVC.persistenceController = self.persistenceController;
+        detailsVC.currentBrew = selectedBrew;
     }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath {
-    NSArray *newArray = nil;
-    NSArray *oldArray = nil;
-    
-    if (newIndexPath) {
-        newArray = [NSArray arrayWithObject:newIndexPath];
-    }
-    
-    if (indexPath) {
-        oldArray = [NSArray arrayWithObject:indexPath];
-    }
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [[self brewTableView] insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeDelete:
-            [[self brewTableView] deleteRowsAtIndexPaths:oldArray withRowAnimation:UITableViewRowAnimationFade];
-            break;
-        case NSFetchedResultsChangeUpdate:
-        {
-            UITableViewCell *cell = [[self brewTableView] cellForRowAtIndexPath:indexPath];
-            NSManagedObject *object = [[self brewFetchedResultsController] objectAtIndexPath:indexPath];
-            [[cell textLabel] setText:[object valueForKey:@"dataItem"]];
-            break;
-        }
-        case NSFetchedResultsChangeMove:
-            [[self brewTableView] deleteRowsAtIndexPaths:oldArray withRowAnimation:UITableViewRowAnimationFade];
-            [[self brewTableView] insertRowsAtIndexPaths:newArray withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
-    [[self brewTableView] endUpdates];
 }
 
 @end

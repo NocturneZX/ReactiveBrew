@@ -36,9 +36,7 @@ NSInteger const JR3ErrorCode = -42;
 - (id)init
 {
     NSException *exception = [NSException exceptionWithName:@"Singleton" reason:@"Use +(CoffeeAPIRapper *)sharedCoffee instead" userInfo:nil];
-    
     [exception raise];
-    
     return nil;
 }
 
@@ -50,7 +48,8 @@ NSInteger const JR3ErrorCode = -42;
 }
 
 -(RACSignal *)fetchmeSomeCoffee{
-        return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            
             NSMutableURLRequest *brewRequest = [NSMutableURLRequest requestWithURL:self.baseURL];
             brewRequest.HTTPMethod = @"GET";
             
@@ -96,7 +95,47 @@ NSInteger const JR3ErrorCode = -42;
                 [downloadBrew cancel];
             }];
             
-        }] replayLazily];
+        }];
+}
+-(RACSignal *)fetchmeMoreCoffeeInfo:(NSString *)coffeeID{
+    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+        
+        NSURL *coffeeURL = [NSURL URLWithString:coffeeID relativeToURL:self.baseURL];
+        
+        NSMutableURLRequest *brewRequest = [NSMutableURLRequest requestWithURL:coffeeURL];
+        brewRequest.HTTPMethod = @"GET";
+        
+        [brewRequest setValue:API_KEY forHTTPHeaderField:@"Authorization"];
+        
+        [brewRequest setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+        [brewRequest setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+        
+        NSURLSessionDataTask *downloadBrew = [self.brewSession dataTaskWithRequest:brewRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *connectionError) {
+            
+            if(connectionError)
+            {
+                [subscriber sendError:connectionError];
+            }
+            else if(!data)
+            {
+                NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"No data was received from the server."};
+                NSError *dataError = [NSError errorWithDomain:JR3ErrorDomain code:JR3ErrorCode userInfo:userInfo];
+                [subscriber sendError:dataError];
+            }
+            else{
+                NSDictionary *results = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:&connectionError];
+                
+                [subscriber sendNext:results];
+                [subscriber sendCompleted];
+            }
+        }];
+        
+        [downloadBrew resume];
+        
+        return [RACDisposable disposableWithBlock:^{
+            [downloadBrew cancel];
+        }];
+    }];
 }
 -(RACSignal *)resetData{
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

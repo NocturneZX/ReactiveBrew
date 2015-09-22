@@ -14,6 +14,8 @@
 		4D0F1B4B1B83B794000467C6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F1B4A1B83B794000467C6 /* Images.xcassets */; };
 		4D0F1B4E1B83B794000467C6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4D0F1B4C1B83B794000467C6 /* LaunchScreen.xib */; };
 		4D0F1B5A1B83B794000467C6 /* ReactiveBrewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D0F1B591B83B794000467C6 /* ReactiveBrewTests.m */; };
+		4D77E5A91BB090A1005A2CD6 /* BrewDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D77E5A81BB090A1005A2CD6 /* BrewDetailsViewController.m */; };
+		4D77E5AD1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D77E5AC1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.m */; };
 		4D82E9C41B94D528006517A6 /* CoffeeAPIRapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */; };
 		4DB604181BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4DB604161BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld */; };
 		4DB6041B1BA8A31D00531D1A /* CoreDataScheduler.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */; };
@@ -48,6 +50,10 @@
 		4D0F1B531B83B794000467C6 /* ReactiveBrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReactiveBrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D0F1B581B83B794000467C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D0F1B591B83B794000467C6 /* ReactiveBrewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReactiveBrewTests.m; sourceTree = "<group>"; };
+		4D77E5A71BB090A1005A2CD6 /* BrewDetailsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrewDetailsViewController.h; sourceTree = "<group>"; };
+		4D77E5A81BB090A1005A2CD6 /* BrewDetailsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrewDetailsViewController.m; sourceTree = "<group>"; };
+		4D77E5AB1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeTableViewCellLite.h; sourceTree = "<group>"; };
+		4D77E5AC1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeTableViewCellLite.m; sourceTree = "<group>"; };
 		4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoffeeAPIRapper.h; sourceTree = "<group>"; };
 		4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoffeeAPIRapper.m; sourceTree = "<group>"; };
 		4DB604151BA37C7E00531D1A /* APICredentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = APICredentials.h; sourceTree = "<group>"; };
@@ -120,22 +126,17 @@
 			children = (
 				4DB604161BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld */,
 				4DB604151BA37C7E00531D1A /* APICredentials.h */,
+				4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */,
+				4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */,
 				4D0F1B3E1B83B794000467C6 /* AppDelegate.h */,
 				4D0F1B3F1B83B794000467C6 /* AppDelegate.m */,
-				4D0F1B441B83B794000467C6 /* ViewController.h */,
-				4D0F1B451B83B794000467C6 /* ViewController.m */,
+				4D77E5AA1BB0DF5E005A2CD6 /* Controllers */,
 				4D0F1B471B83B794000467C6 /* Main.storyboard */,
 				4D0F1B4A1B83B794000467C6 /* Images.xcassets */,
 				4D0F1B4C1B83B794000467C6 /* LaunchScreen.xib */,
 				4D0F1B3A1B83B794000467C6 /* Supporting Files */,
-				4D82E9C21B94D528006517A6 /* CoffeeAPIRapper.h */,
-				4D82E9C31B94D528006517A6 /* CoffeeAPIRapper.m */,
 				4DB6041F1BADA97E00531D1A /* Data Models */,
 				4DE1541D1BA0A31A00D41FD1 /* Core Data Stack */,
-				4DB604191BA8A31D00531D1A /* CoreDataScheduler.h */,
-				4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */,
-				4DB6041C1BA9D87200531D1A /* CoffeeTableViewCell.h */,
-				4DB6041D1BA9D87200531D1A /* CoffeeTableViewCell.m */,
 			);
 			path = ReactiveBrew;
 			sourceTree = "<group>";
@@ -166,6 +167,21 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		4D77E5AA1BB0DF5E005A2CD6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4DB6041C1BA9D87200531D1A /* CoffeeTableViewCell.h */,
+				4DB6041D1BA9D87200531D1A /* CoffeeTableViewCell.m */,
+				4D0F1B441B83B794000467C6 /* ViewController.h */,
+				4D0F1B451B83B794000467C6 /* ViewController.m */,
+				4D77E5A71BB090A1005A2CD6 /* BrewDetailsViewController.h */,
+				4D77E5A81BB090A1005A2CD6 /* BrewDetailsViewController.m */,
+				4D77E5AB1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.h */,
+				4D77E5AC1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		4DB6041F1BADA97E00531D1A /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +196,8 @@
 		4DE1541D1BA0A31A00D41FD1 /* Core Data Stack */ = {
 			isa = PBXGroup;
 			children = (
+				4DB604191BA8A31D00531D1A /* CoreDataScheduler.h */,
+				4DB6041A1BA8A31D00531D1A /* CoreDataScheduler.m */,
 				4DE1541A1BA0A31500D41FD1 /* JR3PersistenceController.h */,
 				4DE1541B1BA0A31500D41FD1 /* JR3PersistenceController.m */,
 			);
@@ -334,9 +352,11 @@
 				4DBE63101B98F78000F6AC6D /* Coffee.m in Sources */,
 				4DB6041B1BA8A31D00531D1A /* CoreDataScheduler.m in Sources */,
 				4D0F1B461B83B794000467C6 /* ViewController.m in Sources */,
+				4D77E5AD1BB1CA2F005A2CD6 /* CoffeeTableViewCellLite.m in Sources */,
 				4DB6041E1BA9D87200531D1A /* CoffeeTableViewCell.m in Sources */,
 				4DB604181BA78D4E00531D1A /* ReactiveBrew.xcdatamodeld in Sources */,
 				4DE1541C1BA0A31500D41FD1 /* JR3PersistenceController.m in Sources */,
+				4D77E5A91BB090A1005A2CD6 /* BrewDetailsViewController.m in Sources */,
 				4D0F1B3D1B83B794000467C6 /* main.m in Sources */,
 				4DBE630A1B98F6D000F6AC6D /* CoffeeEntity.m in Sources */,
 			);
