@@ -48,8 +48,9 @@ NSInteger const JR3ErrorCode = -42;
 }
 
 -(RACSignal *)fetchmeSomeCoffee{
-        return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
-            
+    @weakify(self);
+        return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+            @strongify(self)
             NSMutableURLRequest *brewRequest = [NSMutableURLRequest requestWithURL:self.baseURL];
             brewRequest.HTTPMethod = @"GET";
             
@@ -95,7 +96,7 @@ NSInteger const JR3ErrorCode = -42;
                 [downloadBrew cancel];
             }];
             
-        }];
+        }]deliverOn:[RACScheduler mainThreadScheduler]];
 }
 -(RACSignal *)fetchmeMoreCoffeeInfo:(NSString *)coffeeID{
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

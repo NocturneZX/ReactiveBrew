@@ -65,6 +65,7 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
          self.coffees = [self.brewFetchedResultsController fetchedObjects];
      }
      completed:^{
+         @strongify(self);
          self.coffees = [self.brewFetchedResultsController fetchedObjects];
          [self.brewTableView reloadData];
 
@@ -100,7 +101,7 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 //    id<NSFetchedResultsSectionInfo> sectionInfo = [[[self brewFetchedResultsController]sections] objectAtIndex:section];
 //    return [sectionInfo numberOfObjects] ? 0 : [sectionInfo numberOfObjects];
-    return [self.coffees count] > 0 ? 0 : [self.coffees count];
+    return [self.coffees count] > 0 ? [self.coffees count] : 0;
 }
 
 // Row display. Implementers should *always* try to reuse cells by setting each cell's reuseIdentifier and querying for available reusable cells with dequeueReusableCellWithIdentifier:
@@ -123,26 +124,46 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
     coffeecell.brewTitle.text = currentBrew.name;
     coffeecell.brewDescription.text = currentBrew.desc;
     [coffeecell.brewImage sd_setImageWithURL:[NSURL URLWithString:currentBrew.imageurl]
-                                                    placeholderImage:[UIImage imageNamed:@"placeholder"]completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                                        
-                                                    }];
+                        placeholderImage:[UIImage imageNamed:@"placeholder"]
+                        completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL)
+                            {
+                                if (!error) {
+                                    NSManagedObject *brewObject = [[self brewFetchedResultsController] objectAtIndexPath:indexPath];
+                                    NSManagedObjectContext *moc = [self.brewFetchedResultsController managedObjectContext];
+                                    
+                                    NSData *imageData = UIImagePNGRepresentation(image);
+                                    [brewObject setValue:imageData forKey:@"image"];
+                                    
+                                    NSError *saveError;
+                                    if (![moc save:&saveError]) {
+                                        NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
+                                    }
+                                }
+                            }];
+    
     return coffeecell;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     if ([segue.identifier isEqualToString:@"DetailSegue"]) {
         
+        
         NSIndexPath *currentIDX = [self.brewTableView indexPathForSelectedRow];
         CoffeeEntity *selectedBrew = (self.coffees)[currentIDX.row];
-        
-        [[[CoffeeAPIRapper sharedCoffee]fetchmeMoreCoffeeInfo:selectedBrew.coffee_id]subscribeNext:^(id newInfo) {
 
+        
+        @weakify(self)
+        [[[CoffeeAPIRapper sharedCoffee]fetchmeMoreCoffeeInfo:selectedBrew.coffee_id]
+         subscribeNext:^(id newInfo) {
+            @strongify(self)
             NSString *dateUpdated = [newInfo valueForKey:@"last_updated_at"];
-            
+             NSString *description = [newInfo valueForKey:@"desc"];
+             
             NSManagedObject *brewObject = [[self brewFetchedResultsController] objectAtIndexPath:currentIDX];
             NSManagedObjectContext *moc = [self.brewFetchedResultsController managedObjectContext];
             [brewObject setValue:dateUpdated forKey:@"last_updated_at"];
-            
+            [brewObject setValue:description forKey:@"desc"];
+
             NSError *error;
             if (![moc save:&error]) {
                 NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
@@ -150,11 +171,12 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
 
         }];
         
-        
+        selectedBrew = [[self brewFetchedResultsController] objectAtIndexPath:currentIDX];
         BrewDetailsViewController *detailsVC = (BrewDetailsViewController *)segue.destinationViewController;
         
         detailsVC.persistenceController = self.persistenceController;
         detailsVC.currentBrew = selectedBrew;
+        
     }
 }
 

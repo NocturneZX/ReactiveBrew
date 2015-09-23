@@ -15,6 +15,7 @@
 @dynamic imageurl;
 @dynamic last_updated_at;
 @dynamic name;
+@dynamic image;
 
 -(NSString *)description{
     return [NSString stringWithFormat:@"%@, %@, %@, %@, %@", self.coffee_id, self.name, self.desc, self.imageurl, self.last_updated_at];

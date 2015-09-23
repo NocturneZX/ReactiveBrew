@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Julio Reyes. All rights reserved.
 //
 
+@import UIKit;
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
@@ -16,5 +17,6 @@
 @property (nonatomic, retain) NSString * imageurl;
 @property (nonatomic, retain) NSString * last_updated_at;
 @property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSData * image;
 
 @end

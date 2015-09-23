@@ -20,12 +20,18 @@
 
 @implementation BrewDetailsViewController
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    self.brewDetailsTitle.text = _currentBrew.name;
+    self.brewDetailsTextView.text = _currentBrew.desc;
+    self.brewDetailsImageView.image = [UIImage imageWithData:_currentBrew.image];
+    self.brewDetailsUpdatedTime.text = [NSString stringWithFormat:@"Updated %@", _currentBrew.last_updated_at];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    self.brewDetailsTitle.text = _currentBrew.coffee_id;
-    self.brewDetailsTextView.text = _currentBrew.desc;
+
     
 }
 
