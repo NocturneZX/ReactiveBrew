@@ -99,7 +99,7 @@ NSInteger const JR3ErrorCode = -42;
         }]deliverOn:[RACScheduler mainThreadScheduler]];
 }
 -(RACSignal *)fetchmeMoreCoffeeInfo:(NSString *)coffeeID{
-    return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
+    return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         
         NSURL *coffeeURL = [NSURL URLWithString:coffeeID relativeToURL:self.baseURL];
         
@@ -136,7 +136,7 @@ NSInteger const JR3ErrorCode = -42;
         return [RACDisposable disposableWithBlock:^{
             [downloadBrew cancel];
         }];
-    }];
+    }]deliverOn:[RACScheduler schedulerWithPriority:RACSchedulerPriorityBackground]];
 }
 -(RACSignal *)resetData{
     return [RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {

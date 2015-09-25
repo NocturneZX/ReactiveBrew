@@ -149,11 +149,10 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
         
         
         NSIndexPath *currentIDX = [self.brewTableView indexPathForSelectedRow];
-        CoffeeEntity *selectedBrew = (self.coffees)[currentIDX.row];
-
-        
+        __block CoffeeEntity *selectedBrew = (self.coffees)[currentIDX.row];
+        NSString *brewID = [[self.brewFetchedResultsController objectAtIndexPath:currentIDX]valueForKey:@"coffee_id"];
         @weakify(self)
-        [[[CoffeeAPIRapper sharedCoffee]fetchmeMoreCoffeeInfo:selectedBrew.coffee_id]
+        [[[[CoffeeAPIRapper sharedCoffee]fetchmeMoreCoffeeInfo:selectedBrew.coffee_id]deliverOn:[RACScheduler schedulerWithPriority:RACSchedulerPriorityBackground]]
          subscribeNext:^(id newInfo) {
             @strongify(self)
             NSString *dateUpdated = [newInfo valueForKey:@"last_updated_at"];
@@ -169,14 +168,15 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
                 NSLog(@"Unable to save context for %@", [Coffee managedObjectEntityName]);
             }
 
+        }completed:^{
+            
+            selectedBrew = [[self brewFetchedResultsController] objectAtIndexPath:currentIDX];
+            BrewDetailsViewController *detailsVC = (BrewDetailsViewController *)segue.destinationViewController;
+            
+            detailsVC.persistenceController = self.persistenceController;
+            detailsVC.currentBrew = selectedBrew;
+            
         }];
-        
-        selectedBrew = [[self brewFetchedResultsController] objectAtIndexPath:currentIDX];
-        BrewDetailsViewController *detailsVC = (BrewDetailsViewController *)segue.destinationViewController;
-        
-        detailsVC.persistenceController = self.persistenceController;
-        detailsVC.currentBrew = selectedBrew;
-        
     }
 }
 
