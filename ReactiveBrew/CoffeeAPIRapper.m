@@ -98,6 +98,8 @@ NSInteger const JR3ErrorCode = -42;
             
         }]deliverOn:[RACScheduler mainThreadScheduler]];
 }
+
+
 -(RACSignal *)fetchmeMoreCoffeeInfo:(NSString *)coffeeID{
     return [[RACSignal createSignal:^RACDisposable *(id<RACSubscriber> subscriber) {
         

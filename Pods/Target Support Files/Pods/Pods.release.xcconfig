@@ -1,6 +1,5 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/MTLManagedObjectAdapter" "${PODS_ROOT}/Headers/Public/Mantle" "${PODS_ROOT}/Headers/Public/ReactiveCocoa" "${PODS_ROOT}/Headers/Public/SDWebImage"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/MTLManagedObjectAdapter" -isystem "${PODS_ROOT}/Headers/Public/Mantle" -isystem "${PODS_ROOT}/Headers/Public/ReactiveCocoa" -isystem "${PODS_ROOT}/Headers/Public/SDWebImage"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"Pods-MTLManagedObjectAdapter" -l"Pods-Mantle" -l"Pods-ReactiveCocoa" -l"Pods-SDWebImage" -framework "CoreData" -framework "Foundation" -framework "ImageIO"
-OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
+OTHER_LDFLAGS = $(inherited) -ObjC -l"MTLManagedObjectAdapter" -l"Mantle" -l"ReactiveCocoa" -l"SDWebImage" -framework "CoreData" -framework "Foundation" -framework "ImageIO"
 PODS_ROOT = ${SRCROOT}/Pods

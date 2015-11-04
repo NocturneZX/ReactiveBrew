@@ -96,6 +96,7 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
     NSAssert([_brewFetchedResultsController performFetch:&error], @"Unresolved error %@\n%@", [error localizedDescription], [error userInfo]);
 
     return _brewFetchedResultsController;
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -150,7 +151,7 @@ static NSString * const reuseIdentifier = @"CoffeeCell";
         
         NSIndexPath *currentIDX = [self.brewTableView indexPathForSelectedRow];
         __block CoffeeEntity *selectedBrew = (self.coffees)[currentIDX.row];
-        NSString *brewID = [[self.brewFetchedResultsController objectAtIndexPath:currentIDX]valueForKey:@"coffee_id"];
+
         @weakify(self)
         [[[[CoffeeAPIRapper sharedCoffee]fetchmeMoreCoffeeInfo:selectedBrew.coffee_id]deliverOn:[RACScheduler schedulerWithPriority:RACSchedulerPriorityBackground]]
          subscribeNext:^(id newInfo) {
